@@ -8,7 +8,6 @@ st.markdown("""
     <style>
     .stApp { background-color: #f4f6f9; }
     
-    /* تنسيق اسم المتجر الذهبي */
     .store-name {
         font-size: 50px;
         font-weight: bold;
@@ -24,7 +23,7 @@ st.markdown("""
         background: white;
         padding: 20px;
         border-radius: 15px;
-        border-right: 10px solid #bf953f; /* خط ذهبي */
+        border-right: 10px solid #bf953f;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         margin-bottom: 20px;
     }
@@ -32,7 +31,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 2. اسم المتجر والسؤال الجديد
+# 2. اسم المتجر والسؤال
 st.markdown('<div class="store-name">فخامة المركبات | Luxury Cars</div>', unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #555;'>أيُّ تحفةٍ هندسية سترافقك في رحلتك القادمة؟</h3>", unsafe_allow_html=True)
 st.write("---")
@@ -40,13 +39,19 @@ st.write("---")
 # 3. شريط البحث
 search_query = st.text_input("🔍 ابحث عن السيارة التي تليق بك:", "")
 
-# 4. قاعدة البيانات (تمت إضافة لوسيد وسيارات فارهة أخرى)
+# 4. قاعدة البيانات الموسعة (سيارتان لكل تصنيف)
 cars_list = [
-    {"name": "لوسيد أير (Lucid Air)", "cat": "⚡ كهربائية", "price": "320,000 ريال", "img": "https://images.unsplash.com/photo-1617788130012-05ba7feee178?w=600", "specs": ["صناعة سعودية فارهة", "مدى شحن يصل لـ 830 كم", "أسرع شحن في العالم"]},
-    {"name": "لكزس LX 600", "cat": "🏜️ SUV", "price": "580,000 ريال", "img": "https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=600", "specs": ["محرك V6 توين توربو", "فخامة يابانية مطلقة", "قدرات هائلة في الرمال"]},
-    {"name": "مرسيدس G-Class", "cat": "🏜️ SUV", "price": "850,000 ريال", "img": "https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600", "specs": ["أيقونة الدفع الرباعي", "محرك V8 جبار", "تصميم كلاسيكي خالد"]},
-    {"name": "تويوتا كامري 2025", "cat": "🏙️ سيدان", "price": "131,000 ريال", "img": "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600", "specs": ["اعتمادية لا تضاهى", "نظام هايبرد موفر"]},
-    {"name": "بي إم دبليو i7", "cat": "⚡ كهربائية", "price": "620,000 ريال", "img": "https://images.unsplash.com/photo-1669023414166-a4cc7c0fe1f5?w=600", "specs": ["سينما خلفية 31 بوصة", "فخامة كهربائية ألمانية"]},
+    # فئة السيدان
+    {"name": "تويوتا كامري 2025", "cat": "🏙️ سيدان", "price": "131,000 ريال", "img": "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600", "specs": ["اعتمادية عالية", "نظام هايبرد موفر"]},
+    {"name": "مرسيدس S-Class", "cat": "🏙️ سيدان", "price": "650,000 ريال", "img": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600", "specs": ["قمة الرفاهية الألمانية", "نظام MBUX الذكي"]},
+    
+    # فئة SUV
+    {"name": "لكزس LX 600", "cat": "🏜️ SUV", "price": "580,000 ريال", "img": "https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=600", "specs": ["فخامة يابانية مطلقة", "قدرات دفع رباعي هائلة"]},
+    {"name": "مرسيدس G-Class", "cat": "🏜️ SUV", "price": "850,000 ريال", "img": "https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600", "specs": ["تصميم أيقوني خالد", "أداء جبار في الطرق الوعرة"]},
+    
+    # فئة الكهربائية
+    {"name": "لوسيد أير (Lucid Air)", "cat": "⚡ كهربائية", "price": "320,000 ريال", "img": "https://images.unsplash.com/photo-1617788130012-05ba7feee178?w=600", "specs": ["صناعة سعودية فاخرة", "مدى شحن يصل لـ 830 كم"]},
+    {"name": "تسلا موديل X", "cat": "⚡ كهربائية", "price": "410,000 ريال", "img": "https://images.unsplash.com/photo-1571127236794-81c0bbfe1ce3?w=600", "specs": ["أبواب جناح الصقر", "تسارع مذهل ونظام قيادة ذاتي"]},
 ]
 
 # دالة العرض
@@ -57,14 +62,13 @@ def display_car_card(car):
         st.image(car['img'], use_container_width=True)
     with c2:
         st.markdown(f"<div class='car-header'>{car['name']}</div>", unsafe_allow_html=True)
-        st.write(f"**الفئة:** {car['cat']}")
         st.markdown(f"**السعر التقديري:** :green[{car['price']}]")
-        with st.expander("🛠️ المواصفات الفنية"):
+        with st.expander("🛠️ التفاصيل الفنية"):
             for s in car['specs']:
                 st.write(f"• {s}")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 5. منطق العرض والتبويبات
+# 5. منطق العرض
 if search_query:
     results = [c for c in cars_list if search_query.lower() in c['name'].lower()]
     for car in results: display_car_card(car)
