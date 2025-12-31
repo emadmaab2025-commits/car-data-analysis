@@ -8,7 +8,7 @@ st.markdown("""
     <style>
     .stApp { background-color: #f4f6f9; }
     
-    .store-name .store-name {
+    .store-name {
         font-size: 40px;
         color: #ffffff;
         background-color: #1E3A5F; /* لون أزرق ملكي */
@@ -148,5 +148,6 @@ else:
         for car in [c for c in cars_list if "SUV" in c['cat']]: display_car_card(car)
     with t3:
         for car in [c for c in cars_list if "كهربائية" in c['cat']]: display_car_card(car)
+
 
 
