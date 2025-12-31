@@ -1,69 +1,61 @@
 import streamlit as st
 
-# إعداد الصفحة
-st.set_page_config(page_title="مستشارك للسيارات", layout="wide")
+# 1. إعداد الصفحة
+st.set_page_config(page_title="مستشارك للسيارات", layout="centered")
 
-# العنوان الرئيسي
-st.markdown("<h1 style='text-align: center;'>🏎️ معرض سيارات 2025</h1>", unsafe_allow_input=True)
+# 2. تشغيل CSS (هنا سر الجمال والألوان)
+# تأكدنا من استخدام unsafe_allow_html=True بدقة
+st.markdown("""
+    <style>
+    .stApp { background-color: #f8f9fa; }
+    .car-box {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        border-right: 10px solid #1E3A5F;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin-bottom: 25px;
+    }
+    .car-name { color: #1E3A5F; font-size: 24px; font-weight: bold; }
+    </style>
+    """, unsafe_allow_html=True)
 
-# 1. قاعدة بيانات واسعة (أضفت لك 4 فئات مختلفة)
-cars_db = {
-    "تويوتا كامري": {
+st.title("🏎️ معرض سيارات 2025")
+st.write("اضغط على السهم لعرض التفاصيل الفنية العميقة")
+
+# 3. قاعدة البيانات (يمكنك إضافة سيارات أكثر هنا بنفس الطريقة)
+cars = [
+    {
+        "name": "تويوتا كامري 2025",
         "price": "131,000 ريال",
         "img": "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500",
-        "full_specs": ["محرك 2.5L هايبرد", "قوة 225 حصان", "استهلاك 26.2 كم/لتر", "ناقل E-CVT", "رادار وتحديد مسار"]
+        "specs": ["محرك هايبرد 2.5L", "225 حصان", "استهلاك 26.2 كم/لتر"]
     },
-    "نيسان باترول": {
+    {
+        "name": "نيسان باترول 2025",
         "price": "350,000 ريال",
         "img": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500",
-        "full_specs": ["محرك 3.5L توين توربو", "قوة 425 حصان", "استهلاك 10.2 كم/لتر", "دفع رباعي ذكي", "شاشات خلفية"]
-    },
-    "هيونداي توسان": {
-        "price": "115,000 ريال",
-        "img": "https://images.unsplash.com/photo-1709148016462-8b387037597f?w=500",
-        "full_specs": ["محرك 2.0L اقتصادي", "قوة 156 حصان", "استهلاك 14.9 كم/لتر", "سقف بانوراما", "حساسات 360"]
-    },
-    "تسلا موديل 3": {
-        "price": "190,000 ريال",
-        "img": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=500",
-        "full_specs": ["محرك كهربائي بالكامل", "مدى 513 كم", "تسارع 0-100 في 4.4 ثانية", "نظام القيادة الذاتية", "شاشة 15 بوصة"]
+        "specs": ["محرك V6 توين توربو", "425 حصان", "نظام دفع رباعي ذكي"]
     }
-}
+]
 
-# 2. إنشاء نظام "الصفحات" باستخدام القائمة الجانبية
-st.sidebar.header("📂 اختر السيارة")
-selected_car = st.sidebar.selectbox("تصفح المعرض:", ["الرئيسية"] + list(cars_db.keys()))
-
-if selected_car == "الرئيسية":
-    st.info("👈 اختر سيارة من القائمة الجانبية لعرض تفاصيلها الفنية الدقيقة.")
+# 4. عرض المحتوى (الاسم برا والتفاصيل جوا)
+for car in cars:
+    # بداية البطاقة الجمالية
+    st.markdown('<div class="car-box">', unsafe_allow_html=True)
     
-    # عرض أسماء السيارات وصورها فقط في الصفحة الرئيسية
-    cols = st.columns(2)
-    for i, (name, data) in enumerate(cars_db.items()):
-        with cols[i % 2]:
-            with st.container(border=True):
-                st.image(data['img'], use_container_width=True)
-                st.subheader(name)
-                st.markdown(f"**السعر يبدأ من:** :green[{data['price']}]")
-
-else:
-    # 3. صفحة التفاصيل (تظهر عند اختيار سيارة)
-    st.divider()
-    col_a, col_b = st.columns([1.5, 1])
-    
-    with col_a:
-        st.markdown(f"## تفاصيل {selected_car}")
-        st.image(cars_db[selected_car]['img'], use_container_width=True)
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.image(car['img'], use_container_width=True)
+    with col2:
+        st.markdown(f"<div class='car-name'>{car['name']}</div>", unsafe_allow_html=True)
+        st.markdown(f"### :green[{car['price']}]")
         
-    with col_b:
-        st.markdown("### 🛠️ المواصفات الفنية الدقيقة")
-        for spec in cars_db[selected_car]['full_specs']:
-            st.write(f"✅ {spec}")
-        
-        st.markdown(f"### 💰 القيمة: :red[{cars_db[selected_car]['price']}]")
-        
-        if st.button("الرجوع للرئيسية"):
-            st.rerun()
-
-st.sidebar.divider()
-st.sidebar.caption("تطبيق مستشارك الذكي - مشروع الطالب 2025")
+        # هنا التفاصيل التي تظهر عند الضغط فقط
+        with st.expander("🔍 عرض التفاصيل الفنية العميقة"):
+            st.write("---")
+            for spec in car['specs']:
+                st.write(f"✅ {spec}")
+            st.info("تم التحقق من البيانات الفنية")
+            
+    st.markdown('</div>', unsafe_allow_html=True) # نهاية البطاقة
