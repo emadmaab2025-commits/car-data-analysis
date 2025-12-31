@@ -8,17 +8,39 @@ st.markdown("""
     <style>
     .stApp { background-color: #f4f6f9; }
     
-    .store-name {
-        font-size: 40px;
-        color: #ffffff;
-        background-color: #1E3A5F; /* لون أزرق ملكي */
-        padding: 15px 30px;
-        border-radius: 50px; /* زوايا دائرية جداً */
+  .store-name {
+        font-family: 'Georgia', serif;
+        font-size: 50px;
+        color: #e63946; /* أحمر مطاعم كلاسيكي */
         text-align: center;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        margin: 20px auto;
-        width: fit-content;
-        border: 2px solid #bf953f;
+        border-bottom: 3px double #1d3557;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        font-variant: small-caps;
+    }
+    
+    .menu-subtitle {
+        text-align: center;
+        font-style: italic;
+        color: #457b9d;
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .car-card {
+        background: #fffdf5; /* ورق قديم (Creamy paper) */
+        padding: 20px;
+        border: 2px solid #1d3557;
+        border-radius: 0px; /* زوايا حادة كأنه قائمة ورقية */
+        box-shadow: 5px 5px 0px #a8dadc;
+        margin-bottom: 25px;
+    }
+
+    .car-header {
+        color: #1d3557;
+        font-size: 26px;
+        font-family: 'Times New Roman', serif;
+        border-bottom: 1px dashed #e63946;
     }
     
     .car-card {
@@ -148,6 +170,7 @@ else:
         for car in [c for c in cars_list if "SUV" in c['cat']]: display_car_card(car)
     with t3:
         for car in [c for c in cars_list if "كهربائية" in c['cat']]: display_car_card(car)
+
 
 
 
