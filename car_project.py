@@ -72,7 +72,7 @@ cars_list = [
         "name": "لكزس LX 600", 
         "cat": "🏜️ SUV", 
         "price": "580,000 ريال", 
-        "img": "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fksa.yallamotor.com%2Far%2Fnew-cars%2Flexus%2Flx&opi=89978449", 
+        "img": "https://ymimg1.b8cdn.com/resized/car_model/12688/pictures/15980218/webp_listing_main_2022_Lexux_LX_600_Exterior_01.webp", 
         "specs": [
             "محرك V6 توين توربو سعة 3.5 لتر",
             "نظام زحف متطور للطرق الوعرة",
@@ -98,7 +98,7 @@ cars_list = [
         "name": "لوسيد أير (Lucid Air)", 
         "cat": "⚡ كهربائية", 
         "price": "320,000 ريال", 
-        "img": "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fme.motor1.com%2Fnews%2F731689%2F%25D9%2584%25D9%2588%25D8%25B3%25D9%258A%25D8%25AF-%25D8%25A7%25D9%258A%25D8%25B1-%25D8%25B3%25D9%2581%25D8%25A7%25D9%258A%25D8%25B1-%25D8%25A7%25D9%2584%25D9%2585%25D8%25B5%25D9%2581%25D8%25AD%25D8%25A9%2F&opi=89978449:*", 
+        "img": "https://cdn.motor1.com/images/mgl/6ZopYG/s1/armored-lucid-air-sapphire.jpg", 
         "specs": [
             "أول سيارة كهربائية فاخرة تصنع في السعودية",
             "مدى شحن استثنائي يصل إلى 830 كم",
@@ -110,7 +110,7 @@ cars_list = [
         "name": "تسلا موديل X", 
         "cat": "⚡ كهربائية", 
         "price": "410,000 ريال", 
-        "img": "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fme.motor1.com%2Fnews%2F770802%2F%25D8%25AA%25D8%25B3%25D9%2584%25D8%25A7-%25D9%2585%25D9%2588%25D8%25AF%25D9%258A%25D9%2584-%25D9%2588%25D8%25A7%25D9%258A-2026%2F&opi=89978449", 
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWoCd8xofzsyzbEEb84BbamoUQCjcjdKVpBQ&s", 
         "specs": [
             "أبواب (جناح الصقر) تفتح للأعلى كهربائياً",
             "تسارع مذهل من 0 إلى 100 كم/س في 2.6 ثانية",
@@ -146,3 +146,4 @@ else:
         for car in [c for c in cars_list if "SUV" in c['cat']]: display_car_card(car)
     with t3:
         for car in [c for c in cars_list if "كهربائية" in c['cat']]: display_car_card(car)
+
