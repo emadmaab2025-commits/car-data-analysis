@@ -1,86 +1,61 @@
 import streamlit as st
 
-# 1. إعدادات الصفحة
+# 1. إعداد الصفحة والعنوان
 st.set_page_config(page_title="مستشارك الذكي للسيارات", layout="centered")
 
-# 2. إضافة لمسات CSS الجمالية
-st.markdown("""
-    <style>
-    /* تغيير خلفية التطبيق */
-    .stApp {
-        background-color: #f4f7f6;
-    }
-    
-    /* تصميم بطاقة السيارة */
-    .car-card {
-        background-color: white;
-        padding: 15px;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        margin-bottom: 20px;
-        border-right: 8px solid #1E3A5F; /* خط جانبي ملون */
-    }
-    
-    /* تنسيق اسم السيارة */
-    .car-name {
-        color: #1E3A5F;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    
-    /* تنسيق السعر */
-    .price-style {
-        background-color: #e8f5e9;
-        color: #2e7d32;
-        padding: 5px 15px;
-        border-radius: 10px;
-        font-weight: bold;
-        display: inline-block;
-    }
-    </style>
-    """, unsafe_allow_input=True)
-
-# العنوان الرئيسي
-st.markdown("<h1 style='text-align: center; color: #1E3A5F;'>🏎️ مستشارك الذكي للسيارات</h1>", unsafe_allow_input=True)
+st.markdown("<h1 style='text-align: center; color: #1E3A5F;'>🏎️ معرض سيارات 2025</h1>", unsafe_allow_input=True)
 st.write("---")
 
-# قاعدة البيانات
+# 2. قاعدة بيانات السيارات (العمق والتفصيل)
 cars = [
     {
         "name": "تويوتا كامري 2025",
-        "img": "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500",
+        "cat": "سيدان - اقتصادية",
         "price": "131,000 ريال",
-        "specs": {"المحرك": "2.5L هايبرد", "الاستهلاك": "26.2 كم/لتر", "القوة": "225 حصان"}
+        "img": "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=500",
+        "specs": {
+            "المحرك": "2.5 لتر هايبرد",
+            "القوة": "225 حصان",
+            "الاستهلاك": "26.2 كم/لتر",
+            "ناقل الحركة": "E-CVT أوتوماتيك"
+        }
     },
     {
         "name": "نيسان باترول 2025",
-        "img": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500",
+        "cat": "عائلية - SUV",
         "price": "350,000 ريال",
-        "specs": {"المحرك": "3.5L توين توربو", "الاستهلاك": "10.2 كم/لتر", "القوة": "425 حصان"}
+        "img": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500",
+        "specs": {
+            "المحرك": "3.5 لتر توين توربو",
+            "القوة": "425 حصان",
+            "الاستهلاك": "10.2 كم/لتر",
+            "الدفع": "رباعي ذكي (4WD)"
+        }
     }
 ]
 
-# عرض السيارات باستخدام CSS
+# 3. عرض السيارات بتصميم "البطاقات" الجمالي
 for car in cars:
-    # بداية الحاوية الجمالية
-    st.markdown(f"""
-        <div class="car-card">
-            <div class="car-name">{car['name']}</div>
-            <div class="price-style">{car['price']}</div>
-        </div>
-    """, unsafe_allow_input=True)
-    
-    # عرض الصورة والزر
-    col1, col2 = st.columns([1, 2])
-    with col1:
-        st.image(car['img'], use_container_width=True)
-    
-    with col2:
-        # زر التفاصيل (يظهر فقط عند الضغط)
-        with st.expander("🛠️ عرض المواصفات الفنية العميقة"):
-            for key, value in car['specs'].items():
-                st.write(f"🔹 {key}: {value}")
-            st.success("هذه السيارة مطابقة لمعايير كفاءة الطاقة السعودية.")
-    
-    st.write("") # مسافة بين السيارات
+    # استخدام حاوية بحدود (Border) لتعطي شكل البطاقة الاحترافي
+    with st.container(border=True):
+        col1, col2 = st.columns([1, 2])
+        
+        with col1:
+            st.image(car['img'], use_container_width=True)
+            
+        with col2:
+            # استخدام ألوان نصوص Streamlit الجاهزة (blue, green, red) للجماليات
+            st.write(f"📂 :blue[{car['cat']}]")
+            st.subheader(car['name'])
+            st.markdown(f"### :green[{car['price']}]")
+            
+            # زر عرض التفاصيل الفنية
+            with st.expander("🔍 عرض المواصفات الفنية العميقة"):
+                st.write("---")
+                for key, value in car['specs'].items():
+                    st.write(f"🔹 {key}: {value}")
+                st.info("💡 هذه البيانات مطابقة للمواصفات السعودية الرسمية.")
+
+# إضافة لمسة نهائية في أسفل الصفحة
+st.divider()
+st.caption("تم تطوير هذا التطبيق باستخدام تقنيات الذكاء الاصطناعي - 2025")
