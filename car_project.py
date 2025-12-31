@@ -8,15 +8,17 @@ st.markdown("""
     <style>
     .stApp { background-color: #f4f6f9; }
     
-    .store-name {
-        font-size: 50px;
-        font-weight: bold;
-        background: -webkit-linear-gradient(#bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .store-name .store-name {
+        font-size: 40px;
+        color: #ffffff;
+        background-color: #1E3A5F; /* لون أزرق ملكي */
+        padding: 15px 30px;
+        border-radius: 50px; /* زوايا دائرية جداً */
         text-align: center;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        margin-bottom: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        margin: 20px auto;
+        width: fit-content;
+        border: 2px solid #bf953f;
     }
     
     .car-card {
@@ -146,4 +148,5 @@ else:
         for car in [c for c in cars_list if "SUV" in c['cat']]: display_car_card(car)
     with t3:
         for car in [c for c in cars_list if "كهربائية" in c['cat']]: display_car_card(car)
+
 
